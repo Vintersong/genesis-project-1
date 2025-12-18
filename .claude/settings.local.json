@@ -10,7 +10,8 @@
       "Bash(export GDK=D:/RetroProjects/SGDK)",
       "Bash($GDK/bin/make -f $GDK/makefile.gen clean)",
       "Bash($GDK/bin/make -f $GDK/makefile.gen -j1 release)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
