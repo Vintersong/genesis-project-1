@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(ls -la \"d:\\RetroProjects\\genesis-project-1\\inc\\systems\"\" 2>/dev/null || dir \"d:RetroProjectsgenesis-project-1incsystems\"\")",
+      "Bash(ls -la \"d:\\RetroProjects\\genesis-project-1\\src\\systems\"\" 2>/dev/null || dir \"d:RetroProjectsgenesis-project-1srcsystems\"\")",
+      "Bash(test -d:*)",
+      "Bash(set GDK=D:RetroProjectsSGDK)",
+      "Bash(%GDK%binmake -f %GDK%makefile.gen clean)",
+      "Bash(export GDK=D:/RetroProjects/SGDK)",
+      "Bash($GDK/bin/make -f $GDK/makefile.gen clean)",
+      "Bash($GDK/bin/make -f $GDK/makefile.gen -j1 release)",
+      "Bash(git add:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

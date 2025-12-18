@@ -1,0 +1,31 @@
+# Build output
+out/
+*.bin
+*.elf
+*.out
+*.o
+*.d
+*.lst
+*.map
+*.wch
+
+# SGDK generated files
+res/resources.h
+res/resources.rs
+src/boot/
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files (keep .vscode for shared settings)
+.idea/
+*.code-workspace
+
+# Emulator configs (personal settings)
+Gens.cfg
+*.srm
+*.state*

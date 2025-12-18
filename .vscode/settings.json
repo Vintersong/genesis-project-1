@@ -1,0 +1,14 @@
+{ 
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "C_Cpp.default.includePath": ["D:\\RetroProjects\\SGDK\\inc",
+    "D:\\RetroProjects\\SGDK\\res",
+    "res",
+    "inc"
+],
+"files.associations": {
+    "*.pas": "pascal",
+    "genesis.h": "c",
+    "playercontroller.h": "c",
+    "player.h": "c"
+}
+}
