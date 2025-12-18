@@ -129,7 +129,7 @@ This is a personal learning project, but feedback and suggestions are welcome! F
 ## 🙏 Credits
 
 - **SGDK**: Stephane Dallongeville's Sega Genesis Development Kit
-- **Development**: [Your Name/Handle]
+- **Development**: Vintersong
 
 ---
 
