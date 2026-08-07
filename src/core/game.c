@@ -9,6 +9,8 @@
 #include "world/zone.h"
 #include "ui/hud.h"
 #include "gameplay/stats.h"
+#include "gameplay/checkpoint.h"
+#include "gameplay/pickup.h"
 
 // Global game state
 GameState currentGameState = GAME_STATE_TITLE;
@@ -25,7 +27,13 @@ void gameInit() {
     
     // Initialize stats
     statsInit();
-    
+
+    // Initialize checkpoints (depends on zone system for zoneID indexing)
+    checkpointInit();
+
+    // Initialize pickups (depends on zone system for zoneID indexing)
+    pickupInit();
+
     // Initialize assets
     initializeAssets();
     
@@ -46,6 +54,8 @@ void gameInit() {
 void gameUpdate() {
     switch (currentGameState) {
         case GAME_STATE_TITLE:
+            break;
+        case GAME_STATE_MENU:
             // Title screen logic (to be implemented)
             // For now, just transition to playing on button press
             if (JOY_readJoypad(JOY_1) & BUTTON_START) {
@@ -59,6 +69,13 @@ void gameUpdate() {
             playerUpdate();
             enemyUpdate();
             bossUpdate();
+            checkpointUpdate();
+            pickupUpdate();
+
+            if (player.base.currentState == PLAYER_STATE_DEAD) {
+                checkpointRespawnPlayer();
+            }
+
             hudUpdate();
             hudRender();
             // Camera update will be called from main
@@ -93,7 +110,9 @@ void gameChangeState(GameState newState) {
         case GAME_STATE_TITLE:
             // Reset game
             break;
-            
+        case GAME_STATE_MENU:
+            // Game menu
+            break;            
         case GAME_STATE_PLAYING:
             // Resume or start gameplay
             break;

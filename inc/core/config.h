@@ -14,6 +14,7 @@
 #define AIR_FRICTION FIX32(0.95)
 
 // Player constants
+#define PLAYER_HITBOX_SIZE 16  // matches the implicit sprite size used for AABB triggers (checkpoints, pickups)
 #define PLAYER_WALK_SPEED FIX32(2.0)
 #define PLAYER_RUN_SPEED FIX32(4.0)
 #define PLAYER_JUMP_VELOCITY FIX32(-8.0)
