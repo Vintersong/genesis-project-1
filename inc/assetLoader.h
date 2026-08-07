@@ -9,6 +9,7 @@ extern u16 ind;
 extern int scrollBackground_offset;
 extern int scrollForeground_offset;
 extern Sprite *playerSprite;
+extern Sprite *enemySprite;
  
 // Declare the functions...
 void initializeAssets();
