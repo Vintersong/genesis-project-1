@@ -11,7 +11,7 @@ typedef struct {
     u8 currentState;   // holds a per-type state enum value (e.g. PlayerState), cast at use sites
     bool onGround;
     bool facingRight;
-    CollisionBox hitbox;
+    CollisionBox hitbox;   // reserved for future combat/hit-detection wiring; unused in this plan
     Sprite* sprite;
 } Entity;
 

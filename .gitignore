@@ -8,7 +8,7 @@ out/
 *.lst
 *.map
 *.wch
-build_output.log
+*build_output.log
 
 # SGDK generated files
 res/resources.h

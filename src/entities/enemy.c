@@ -32,6 +32,7 @@ void enemyUpdate(void) {
     entityApplyPhysics(&enemy.base);
     entityKeepInBounds(&enemy.base);
 
+    // HURT-state exit condition is deliberately deferred to a future combat-system task; not an oversight.
     if (enemy.base.currentState != ENEMY_STATE_HURT) {
         enemy.base.currentState = enemy.base.onGround ? ENEMY_STATE_IDLE : ENEMY_STATE_FALLING;
     }

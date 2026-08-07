@@ -35,6 +35,7 @@ void bossUpdate(void) {
     entityApplyPhysics(&boss.base);
     entityKeepInBounds(&boss.base);
 
+    // HURT-state exit condition is deliberately deferred to a future combat-system task; not an oversight.
     if (boss.base.currentState != BOSS_STATE_HURT) {
         boss.base.currentState = boss.base.onGround ? BOSS_STATE_IDLE : BOSS_STATE_FALLING;
     }

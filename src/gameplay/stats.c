@@ -1,6 +1,7 @@
 #include <genesis.h>
 #include "gameplay/stats.h"
 #include "entities/player.h"
+#include "core/entity.h"
 
 void statsInit() {
     player.base.health = 100;
@@ -10,14 +11,11 @@ void statsInit() {
 }
 
 bool takeDamage(u16 damage) {
-    if (player.base.health > damage) {
-        player.base.health -= damage;
-        return TRUE; // Still alive
-    } else {
-        player.base.health = 0;
+    bool died = entityTakeDamage(&player.base, damage);
+    if (died) {
         setPlayerState(PLAYER_STATE_DEAD);
-        return FALSE; // Dead
     }
+    return !died;
 }
 
 void healDamage(u16 amount) {

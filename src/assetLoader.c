@@ -52,7 +52,7 @@ void loadEnemyAssets()
 void loadBossAssets()
 {
     // Placeholder: reuse player sprite art on PAL3 until boss art exists
-    PAL_setPalette(PAL3, pSprite.palette->data, DMA);
+    // PAL3 already set by loadEnemyAssets() (called first in initializeAssets()); no need to re-set it here.
     bossSprite = SPR_addSprite(
                         &pSprite,
                         280,  // bossInit() will override this anyway
