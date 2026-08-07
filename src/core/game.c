@@ -3,6 +3,8 @@
 #include "core/config.h"
 #include "systems/input.h"
 #include "entities/player.h"
+#include "entities/enemy.h"
+#include "entities/boss.h"
 #include "assetLoader.h"
 #include "world/zone.h"
 #include "ui/hud.h"
@@ -29,7 +31,11 @@ void gameInit() {
     
     // Initialize player
     playerInit();
-    
+
+    // Initialize enemy and boss
+    enemyInit();
+    bossInit();
+
     // Initialize HUD
     hudInit();
     
@@ -51,6 +57,8 @@ void gameUpdate() {
             // Main gameplay update
             inputUpdate();
             playerUpdate();
+            enemyUpdate();
+            bossUpdate();
             hudUpdate();
             hudRender();
             // Camera update will be called from main
