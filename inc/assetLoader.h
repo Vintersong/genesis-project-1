@@ -15,6 +15,8 @@ extern Sprite *bossSprite;
 // Declare the functions...
 void initializeAssets();
 void loadPlayerAssets();
+void loadEnemyAssets();
+void loadBossAssets();
 void loadLevelAssets();
 void updateBackgroundScroll();
 

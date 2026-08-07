@@ -3,6 +3,8 @@
 #include "entities/player.h"
 
 void loadPlayerAssets();
+void loadEnemyAssets();
+void loadBossAssets();
 void loadLevelAssets();
 void updateBackgroundScroll();
 void initializeAssets();
@@ -12,12 +14,16 @@ u16 ind = TILE_USER_INDEX;
 int scrollBackground_offset = 0;
 int scrollForeground_offset = 0;
 Sprite *playerSprite;
+Sprite *enemySprite;
+Sprite *bossSprite;
 
 
 void initializeAssets()
 {
     SPR_init();
     loadPlayerAssets();
+    loadEnemyAssets();
+    loadBossAssets();
     loadLevelAssets();
     VDP_setScrollingMode(HSCROLL_PLANE, VSCROLL_PLANE);
 }
@@ -30,6 +36,28 @@ void loadPlayerAssets()
                         160,  // Just a reasonable default
                         180,  // playerInit() will override this anyway
                     TILE_ATTR(PAL2, FALSE, FALSE, FALSE));
+}
+
+void loadEnemyAssets()
+{
+    // Placeholder: reuse player sprite art on PAL3 until enemy art exists
+    PAL_setPalette(PAL3, pSprite.palette->data, DMA);
+    enemySprite = SPR_addSprite(
+                        &pSprite,
+                        220,  // enemyInit() will override this anyway
+                        100,
+                    TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
+}
+
+void loadBossAssets()
+{
+    // Placeholder: reuse player sprite art on PAL3 until boss art exists
+    PAL_setPalette(PAL3, pSprite.palette->data, DMA);
+    bossSprite = SPR_addSprite(
+                        &pSprite,
+                        280,  // bossInit() will override this anyway
+                        100,
+                    TILE_ATTR(PAL3, FALSE, FALSE, FALSE));
 }
 
 void loadLevelAssets()
@@ -47,7 +75,7 @@ void loadLevelAssets()
                     FALSE,
                     TRUE); // <- This extra argument is for a bitmap, not for a tilemap
     ind += background.tileset->numTile;
-    
+
     // Background A - Your original code was correct here
     PAL_setPalette(PAL1, foreground.palette->data, DMA);
     VDP_drawImageEx(BG_A,
