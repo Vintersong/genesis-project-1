@@ -7,7 +7,7 @@
 void entityApplyPhysics(Entity* e) {
     if (!e) return;
 
-    e->onGround = checkGroundCollision(e->posY);
+    e->onGround = checkGroundCollision(e->posX, e->posY);
 
     if (!e->onGround) {
         applyGravity(&e->velY);

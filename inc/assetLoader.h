@@ -6,8 +6,8 @@
 // Declare the global variables that will be used across files.
 // Use 'extern' to indicate that they are defined 
 extern u16 ind;
+extern u16 levelTileBaseIndex;
 extern int scrollBackground_offset;
-extern int scrollForeground_offset;
 extern Sprite *playerSprite;
 extern Sprite *enemySprite;
 extern Sprite *bossSprite;

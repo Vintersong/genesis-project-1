@@ -31,10 +31,11 @@ bool collisionAABB(CollisionBox* box1, CollisionBox* box2);
 bool collisionPointRect(s16 px, s16 py, CollisionBox* box);
 
 /**
- * @brief Check if player is on ground (simple Y threshold for now)
- * @param playerY Player's Y position
- * @return TRUE if on ground, FALSE otherwise
+ * @brief Check if an entity is standing on a solid tile
+ * @param posX Entity's X position (fixed-point)
+ * @param posY Entity's Y position (fixed-point)
+ * @return TRUE if the tile just below the entity's feet is solid, FALSE otherwise
  */
-bool checkGroundCollision(fix32 playerY);
+bool checkGroundCollision(fix32 posX, fix32 posY);
 
 #endif // COLLISION_H

@@ -1,6 +1,8 @@
 #include <genesis.h>
 #include <camera.h>
 #include "entities/player.h"
+#include "world/tilemap.h"
+#include "core/config.h"
 
 // These bounds are in screen coordinates relative to the center of the screen
 #define CAMERA_BOUNDS_LEFT 152
@@ -10,12 +12,12 @@
 //Viewport
 #define HORIZONTAL_RESOLUTION 320
 #define VERTICAL_RESOLUTION 224
-//MAP SIZE
-#define MAP_HEIGHT 100 // Placeholder
-#define MAP_WIDTH 100  // Placeholder
+//MAP SIZE (matches res/level.png: 80x28 tiles at 8px)
+#define MAP_HEIGHT 224
+#define MAP_WIDTH 640
 //PLAYER SPRITE SIZE
-#define PLAYER_WIDTH 10  // Placeholder
-#define PLAYER_HEIGHT 10 // Placeholder
+#define PLAYER_WIDTH PLAYER_HITBOX_SIZE
+#define PLAYER_HEIGHT PLAYER_HITBOX_SIZE
 
 // Global variables must have their type specified.
 u16 currentCameraX = 0;
@@ -128,10 +130,12 @@ void mainCamera()
 
         // bVScroll is u8, so it's always >= 0
         if(bVScroll > 32) bVScroll = 0;
-        /*TO-DO MAP_scrollTo(,newCameraXPosition, newCameraYPosition) */
-        //Scrolling Background
+        //Scrolling distant parallax Background (BG_B)
         VDP_setHorizontalScroll(BG_B,bHScroll);
         VDP_setVerticalScroll(BG_B, bVScroll);
+
+        // Solid level tilemap (BG_A) scrolls 1:1 with the camera
+        tilemapScrollTo(currentCameraX, currentCameraY);
     }
 
     // TO-DO Update player sprite position SPR_setPosition(playerSprite, F32_toInt(player.posX)-newCameraPositionX, F32_toInt(player.posY)-newCameraPositionY);

@@ -46,7 +46,7 @@ void playerInit() {
 void playerUpdate() {
     // Update onGround unconditionally every frame (not just when not dashing)
     // This prevents onGround from going stale during a dash
-    player.base.onGround = checkGroundCollision(player.base.posY);
+    player.base.onGround = checkGroundCollision(player.base.posX, player.base.posY);
 
     // Apply physics if not dashing
     if (player.base.currentState != PLAYER_STATE_DASHING) {

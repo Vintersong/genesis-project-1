@@ -26,6 +26,10 @@
 #define TARGET_FPS 60
 #define TILE_DIMENSION 8  // Tile size in pixels (renamed to avoid SGDK conflict)
 
+// Tilemap dimensions (placeholder level.png is 640x224px = 80x28 tiles)
+#define TILEMAP_WIDTH_TILES 80
+#define TILEMAP_HEIGHT_TILES 28
+
 // Zone IDs
 #define ZONE_CPU 0
 #define ZONE_GPU 1

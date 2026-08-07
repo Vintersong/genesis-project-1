@@ -1,6 +1,8 @@
 #include <genesis.h>
 #include "world/zone.h"
+#include "world/tilemap.h"
 #include "core/config.h"
+#include "assetLoader.h"
 
 // Global current zone
 Zone currentZone;
@@ -51,13 +53,20 @@ void loadZone(u8 zoneID) {
     }
     
     currentZone.currentSubZone = 0;
-    
-    // TODO: Load zone tilemap, sprites, enemies, etc.
+
+    // Reuses the fixed VRAM tile slot freed by unloadZone() above, since only
+    // one zone's tilemap is ever resident at a time. Deliberately not `ind`
+    // here: `ind` keeps advancing as other assets load, so by the time a zone
+    // transition happens it no longer points at the level tileset's slot.
+    tilemapLoad(zoneID, levelTileBaseIndex);
+
+    // TODO: Load zone-specific sprites, enemies, etc.
 }
 
 void unloadZone() {
-    // TODO: Unload current zone assets
-    // Free sprites, clear tilemap, etc.
+    tilemapUnload();
+
+    // TODO: Unload zone-specific sprites, enemies, etc.
 }
 
 u8 getCurrentZone() {
