@@ -10,8 +10,10 @@
 Player player;
 
 void playerInit() {
-    // Initialize position (center of screen)
-    player.base.posX = FIX32(160);
+    // Spawn at the start of the ability-test course (see tilemap.c's
+    // buildPlaceholderCollisionGrid()), not screen center, so it's reachable
+    // by just walking right.
+    player.base.posX = FIX32(40);
     player.base.posY = FIX32(100);
     player.base.velX = FIX32(0);
     player.base.velY = FIX32(0);
@@ -31,10 +33,15 @@ void playerInit() {
     player.canDash = FALSE;
     player.dashCooldown = 0;
     player.dashTimer = 0;
-    player.hasDashAbility = FALSE;
+    // TEMPORARY for ability-test level: normally FALSE until the dash-module
+    // pickup is collected, but that pickup lives in ZONE_GPU which nothing
+    // can reach yet (no zone-transition triggers exist). Revert to FALSE once
+    // zone transitions / pickups are reachable in normal play.
+    player.hasDashAbility = TRUE;
 
     player.canDoubleJump = FALSE;
-    player.hasDoubleJumpAbility = FALSE;
+    // TEMPORARY for ability-test level: see hasDashAbility comment above.
+    player.hasDoubleJumpAbility = TRUE;
 
     player.parryWindow = PLAYER_PARRY_WINDOW;
     player.hasParryAbility = FALSE;

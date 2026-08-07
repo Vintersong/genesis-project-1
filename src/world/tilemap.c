@@ -6,17 +6,40 @@
 static Map* currentMap = NULL;
 static u8 collisionGrid[TILEMAP_HEIGHT_TILES][TILEMAP_WIDTH_TILES];
 
-// Placeholder collision layout matching res/level.png until real per-zone level
-// data (e.g. a Tiled export) exists: flat ground across the bottom 3 tile rows,
-// plus one floating platform for testing mid-air solid tiles.
+// Placeholder ability-test level layout, matching res/level.png tile-for-tile
+// until real per-zone level data (e.g. a Tiled export) exists. Column ranges
+// are derived from actual player physics (see src/entities/player.c,
+// inc/core/config.h): a plain jump apexes ~7-8 tiles up, a double jump
+// (retriggered near the first apex) reaches ~15 tiles up, and a dash covers a
+// flat 8-tile burst with no gravity. Layout, left to right:
+//   - cols  0-11: spawn ground
+//   - cols 12-14: basic-jump pit (3 tiles wide, trivially jumpable)
+//   - cols 20-24, row 19: floating platform reachable by a single jump (6 tiles up)
+//   - cols 33-37, row 13: floating platform requiring a double jump (12 tiles up)
+//   - cols 45-52: dash-only pit (8 tiles wide, exceeds comfortable jump range)
+//   - cols 53-79: finish ground
+// Both pits keep a 1-tile-thick floor at the very bottom row as a shallow
+// safety catch (there's no fall-death/respawn wiring yet), so a missed
+// jump/dash just drops the player a short way instead of falling forever.
+static bool isPitColumn(u16 x) {
+    return (x >= 12 && x <= 14) || (x >= 45 && x <= 52);
+}
+
 static void buildPlaceholderCollisionGrid(void) {
     u16 x, y;
 
     for (y = 0; y < TILEMAP_HEIGHT_TILES; y++) {
         for (x = 0; x < TILEMAP_WIDTH_TILES; x++) {
             bool isGroundRow = (y >= TILEMAP_HEIGHT_TILES - 3);
-            bool isTestPlatform = (y == 18) && (x >= 20) && (x < 26);
-            collisionGrid[y][x] = (isGroundRow || isTestPlatform) ? TILE_SOLID : TILE_EMPTY;
+            bool isPitFloorRow = (y == TILEMAP_HEIGHT_TILES - 1);
+            bool isPit = isPitColumn(x);
+
+            bool isSolidGround = isPit ? isPitFloorRow : isGroundRow;
+            bool isSingleJumpPlatform = (y == 19) && (x >= 20) && (x <= 24);
+            bool isDoubleJumpPlatform = (y == 13) && (x >= 33) && (x <= 37);
+
+            collisionGrid[y][x] = (isSolidGround || isSingleJumpPlatform || isDoubleJumpPlatform)
+                                    ? TILE_SOLID : TILE_EMPTY;
         }
     }
 }
