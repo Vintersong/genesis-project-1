@@ -11,7 +11,13 @@
       "Bash($GDK/bin/make -f $GDK/makefile.gen clean)",
       "Bash($GDK/bin/make -f $GDK/makefile.gen -j1 release)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(bash \"C:/Users/Moldo/.claude/plugins/cache/claude-plugins-official/superpowers/6.2.0/skills/subagent-driven-development/scripts/sdd-workspace\" \"docs/superpowers/plans/2026-08-07-combat-actor-entities.md\")",
+      "Read(//d/RetroProjects/Genesis Projects/genesis-project-1/**)",
+      "Bash(D:/RetroProjects/SGDK/bin/make.exe -f D:/RetroProjects/SGDK/makefile.gen -j1 release)",
+      "Read(//tmp/**)",
+      "Bash(bash \"C:/Users/Moldo/.claude/plugins/cache/claude-plugins-official/superpowers/6.2.0/skills/subagent-driven-development/scripts/review-package\" \"docs/superpowers/plans/2026-08-07-combat-actor-entities.md\" 83eba0e96841f78d77fda9147399a5a118713805 dcd63ff5055a7fa357be698c32afff255323f93d)",
+      "Bash(tee build_output.log)"
     ],
     "deny": [],
     "ask": []

@@ -26,23 +26,23 @@ void mainCamera()
 {
 
     // Stop player sprit leaving screen
-    if (player.posX < FIX32(0))
-        player.posX = FIX32(0);
-    else if (player.posX > FIX32(MAP_WIDTH) - PLAYER_WIDTH)
+    if (player.base.posX < FIX32(0))
+        player.base.posX = FIX32(0);
+    else if (player.base.posX > FIX32(MAP_WIDTH) - PLAYER_WIDTH)
     {
-        player.posX = FIX32(MAP_WIDTH) - PLAYER_WIDTH;
+        player.base.posX = FIX32(MAP_WIDTH) - PLAYER_WIDTH;
     }
 
-    if (player.posY < FIX32(0))
-        player.posY = FIX32(0);
-    else if (player.posY > FIX32(MAP_HEIGHT) - PLAYER_HEIGHT)
+    if (player.base.posY < FIX32(0))
+        player.base.posY = FIX32(0);
+    else if (player.base.posY > FIX32(MAP_HEIGHT) - PLAYER_HEIGHT)
     {
-        player.posY = FIX32(MAP_HEIGHT) - PLAYER_HEIGHT;
+        player.base.posY = FIX32(MAP_HEIGHT) - PLAYER_HEIGHT;
     }
 
     // Player position on the map
-    s16 playerPositionXOnMap = F32_toInt(player.posX);
-    s16 playerPositionYOnMap = F32_toInt(player.posY);
+    s16 playerPositionXOnMap = F32_toInt(player.base.posX);
+    s16 playerPositionYOnMap = F32_toInt(player.base.posY);
 
     // Player position on the screen, relative to the camera
     s16 playerPositionXOnScreen = playerPositionXOnMap - currentCameraX;

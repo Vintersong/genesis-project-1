@@ -28,9 +28,9 @@ void hudInit() {
 
 void hudUpdate() {
     if (!hudVisible) return;
-    
+
     // Update text strings
-    sprintf(healthText, "HP:%03d/%03d", player.health, player.maxHealth);
+    sprintf(healthText, "HP:%03d/%03d", player.base.health, player.base.maxHealth);
     sprintf(staminaText, "SP:%03d/%03d", player.stamina, player.maxStamina);
     sprintf(zoneText, "ZONE:%s", zoneNames[getCurrentZone()]);
 }
@@ -46,10 +46,10 @@ void hudRender() {
     // Draw debug info if needed
     #ifdef DEBUG
     char debugText[32];
-    sprintf(debugText, "X:%d Y:%d", fix32ToInt(player.posX), fix32ToInt(player.posY));
+    sprintf(debugText, "X:%d Y:%d", fix32ToInt(player.base.posX), fix32ToInt(player.base.posY));
     VDP_drawText(debugText, 25, 1);
-    
-    sprintf(debugText, "STATE:%d", player.currentState);
+
+    sprintf(debugText, "STATE:%d", player.base.currentState);
     VDP_drawText(debugText, 25, 2);
     #endif
 }

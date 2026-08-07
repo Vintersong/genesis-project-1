@@ -3,27 +3,27 @@
 #include "entities/player.h"
 
 void statsInit() {
-    player.health = 100;
-    player.maxHealth = 100;
+    player.base.health = 100;
+    player.base.maxHealth = 100;
     player.stamina = 100;
     player.maxStamina = 100;
 }
 
 bool takeDamage(u16 damage) {
-    if (player.health > damage) {
-        player.health -= damage;
+    if (player.base.health > damage) {
+        player.base.health -= damage;
         return TRUE; // Still alive
     } else {
-        player.health = 0;
+        player.base.health = 0;
         setPlayerState(PLAYER_STATE_DEAD);
         return FALSE; // Dead
     }
 }
 
 void healDamage(u16 amount) {
-    player.health += amount;
-    if (player.health > player.maxHealth) {
-        player.health = player.maxHealth;
+    player.base.health += amount;
+    if (player.base.health > player.base.maxHealth) {
+        player.base.health = player.base.maxHealth;
     }
 }
 

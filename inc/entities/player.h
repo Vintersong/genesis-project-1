@@ -3,8 +3,10 @@
 
 #include <genesis.h>
 #include "core/config.h"
+#include "core/entity.h"
 
-typedef enum {
+typedef enum
+{
     PLAYER_STATE_IDLE,
     PLAYER_STATE_RUNNING,
     PLAYER_STATE_JUMPING,
@@ -17,39 +19,25 @@ typedef enum {
     PLAYER_STATE_DEAD
 } PlayerState;
 
-typedef struct {
-    // Position and movement (fixed-point for smooth sub-pixel movement)
-    fix32 posX;
-    fix32 posY;
-    fix32 velX;
-    fix32 velY;
-    
+typedef struct
+{
+    Entity base;
+
     // Stats
-    u16 health;
-    u16 maxHealth;
     u16 stamina;
     u16 maxStamina;
-    
-    // State
-    PlayerState currentState;
-    bool onGround;
-    bool facingRight;
-    
+
     // Abilities
     bool canDash;
     u16 dashCooldown;
     u16 dashTimer;
     bool hasDashAbility;
-    
+
     bool canDoubleJump;
     bool hasDoubleJumpAbility;
-    
+
     u16 parryWindow;
     bool hasParryAbility;
-    
-    // Sprite reference (SGDK sprite pointer)
-    Sprite* sprite;
-    
 } Player;
 
 extern Player player;
@@ -62,7 +50,7 @@ void playerInit();
 
 /**
  * @brief Updates player position and state
- * 
+ *
  * Called every frame to handle player physics,
  * state transitions, and collision detection.
  */
