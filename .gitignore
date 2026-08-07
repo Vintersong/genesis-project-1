@@ -32,3 +32,6 @@ Gens.cfg
 *.state*
 .claude/settings.local.json
 .claude/settings.local.json
+skill_audit.db-shm
+skill_audit.db-wal
+skill_audit.db
