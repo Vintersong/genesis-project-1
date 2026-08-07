@@ -44,11 +44,14 @@ void playerInit() {
 }
 
 void playerUpdate() {
+    // Update onGround unconditionally every frame (not just when not dashing)
+    // This prevents onGround from going stale during a dash
+    player.base.onGround = checkGroundCollision(player.base.posY);
+
     // Apply physics if not dashing
     if (player.base.currentState != PLAYER_STATE_DASHING) {
-        entityApplyPhysics(&player.base);
-
-        // If was jumping/falling and landed, return to idle or running
+        // Check landing transition BEFORE entityApplyPhysics() runs friction/integration
+        // This reads velocity at its pre-friction value, matching original behavior
         if (player.base.onGround &&
             (player.base.currentState == PLAYER_STATE_JUMPING ||
              player.base.currentState == PLAYER_STATE_FALLING)) {
@@ -59,6 +62,9 @@ void playerUpdate() {
                 setPlayerState(PLAYER_STATE_RUNNING);
             }
         }
+
+        // Now apply physics (which includes friction and integration)
+        entityApplyPhysics(&player.base);
     }
 
     // Handle state-specific updates
