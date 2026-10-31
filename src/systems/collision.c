@@ -25,6 +25,6 @@ bool collisionPointRect(s16 px, s16 py, CollisionBox* box) {
 
 bool checkGroundCollision(fix32 playerY) {
     // Simple ground detection - convert fix32 to integer for comparison
-    s16 yPos = fix32ToInt(playerY);
+    s16 yPos = F32_toInt(playerY);
     return yPos >= GROUND_Y;
 }

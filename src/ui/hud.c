@@ -46,7 +46,7 @@ void hudRender() {
     // Draw debug info if needed
     #ifdef DEBUG
     char debugText[32];
-    sprintf(debugText, "X:%d Y:%d", fix32ToInt(player.base.posX), fix32ToInt(player.base.posY));
+    sprintf(debugText, "X:%d Y:%d", F32_toInt(player.base.posX), F32_toInt(player.base.posY));
     VDP_drawText(debugText, 25, 1);
 
     sprintf(debugText, "STATE:%d", player.base.currentState);
