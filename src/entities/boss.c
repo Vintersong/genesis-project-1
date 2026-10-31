@@ -41,8 +41,8 @@ void bossUpdate(void) {
     }
 
     if (boss.base.sprite) {
-        s16 spriteX = boss.base.posX >> 16;
-        s16 spriteY = boss.base.posY >> 16;
+        s16 spriteX = fix32ToInt(boss.base.posX);
+        s16 spriteY = fix32ToInt(boss.base.posY);
         SPR_setPosition(boss.base.sprite, spriteX, spriteY);
         SPR_setHFlip(boss.base.sprite, !boss.base.facingRight);
     }
