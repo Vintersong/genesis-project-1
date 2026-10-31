@@ -34,7 +34,7 @@ bool collisionPointRect(s16 px, s16 py, CollisionBox* box);
  * @brief Check if an entity is standing on a solid tile
  * @param posX Entity's X position (fixed-point)
  * @param posY Entity's Y position (fixed-point)
- * @return TRUE if the tile just below the entity's feet is solid, FALSE otherwise
+ * @return TRUE if the tile just below the entity's feet (posY + PLAYER_HITBOX_SIZE) is solid, per the tilemap collision grid, FALSE otherwise
  */
 bool checkGroundCollision(fix32 posX, fix32 posY);
 

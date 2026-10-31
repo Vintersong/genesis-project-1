@@ -1,9 +1,7 @@
 #include <genesis.h>
 #include "systems/collision.h"
 #include "core/config.h"
-
-// Ground level for simple collision (will be improved with tilemap collision later)
-#define GROUND_Y 180
+#include "world/tilemap.h"
 
 bool collisionAABB(CollisionBox* box1, CollisionBox* box2) {
     if (!box1 || !box2) return FALSE;
@@ -23,8 +21,13 @@ bool collisionPointRect(s16 px, s16 py, CollisionBox* box) {
             py <= box->y + box->height);
 }
 
-bool checkGroundCollision(fix32 playerY) {
-    // Simple ground detection - convert fix32 to integer for comparison
-    s16 yPos = F32_toInt(playerY);
-    return yPos >= GROUND_Y;
+bool checkGroundCollision(fix32 posX, fix32 posY) {
+    // posX/posY are the sprite's top-left; the feet sit at posY + hitbox size.
+    // Probe the pixel row just below the feet at both bottom corners (inset 1px
+    // so touching a wall doesn't count as ground).
+    fix32 feetY = posY + FIX32(PLAYER_HITBOX_SIZE);
+    fix32 leftX = posX + FIX32(1);
+    fix32 rightX = posX + FIX32(PLAYER_HITBOX_SIZE - 2);
+
+    return tilemapIsSolidAtPixel(leftX, feetY) || tilemapIsSolidAtPixel(rightX, feetY);
 }
