@@ -108,24 +108,27 @@ void mainCamera()
     {
         newCameraYPosition = MAP_HEIGHT - VERTICAL_RESOLUTION;
     }
-    u8 bHScroll;
+    s16 bHScroll;
     u8 bVScroll;
     u8 scrollSpeedModifier = 3;
     // Check if camera position changed
     if ((currentCameraX != newCameraXPosition) || (currentCameraY != newCameraYPosition))
     {
-        // Final Step: Update the global camera positions and apply them
-        currentCameraX = newCameraXPosition;
-        currentCameraY = newCameraYPosition;
-        //Interpolation for smooth camera movement
-        s16 diffX = newCameraXPosition - currentCameraX;
-        s16 diffY = newCameraYPosition - currentCameraY;
+        // Ease toward the target: move a quarter of the remaining distance per
+        // frame, but at least 1px so the camera always arrives instead of stalling.
+        s16 diffX = newCameraXPosition - (s16)currentCameraX;
+        s16 diffY = newCameraYPosition - (s16)currentCameraY;
+        s16 stepX = diffX >> 2;
+        s16 stepY = diffY >> 2;
+        if (stepX == 0) stepX = (diffX > 0) - (diffX < 0);
+        if (stepY == 0) stepY = (diffY > 0) - (diffY < 0);
 
-        // Apply smooth interpolation (divide by 4 for smooth follow)
-        currentCameraX += diffX >> 2;
-        currentCameraY += diffY >> 2;
+        currentCameraX += stepX;
+        currentCameraY += stepY;
 
-        bHScroll = (0 - currentCameraX) >> scrollSpeedModifier;
+        // Parallax: BG_B scrolls at 1/8 camera speed. Must be signed (s16) --
+        // a u8 here wraps the negative value and the background jumps.
+        bHScroll = (0 - (s16)currentCameraX) >> scrollSpeedModifier;
         bVScroll = currentCameraY;
 
         // bVScroll is u8, so it's always >= 0
