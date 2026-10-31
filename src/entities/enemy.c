@@ -38,8 +38,8 @@ void enemyUpdate(void) {
     }
 
     if (enemy.base.sprite) {
-        s16 spriteX = enemy.base.posX >> 16;
-        s16 spriteY = enemy.base.posY >> 16;
+        s16 spriteX = F32_toInt(enemy.base.posX);
+        s16 spriteY = F32_toInt(enemy.base.posY);
         SPR_setPosition(enemy.base.sprite, spriteX, spriteY);
         SPR_setHFlip(enemy.base.sprite, !enemy.base.facingRight);
     }

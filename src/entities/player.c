@@ -62,7 +62,7 @@ void playerUpdate() {
         if (player.base.onGround &&
             (player.base.currentState == PLAYER_STATE_JUMPING ||
              player.base.currentState == PLAYER_STATE_FALLING)) {
-            s16 velXInt = player.base.velX >> 16; // Convert fix32 to int
+            s16 velXInt = F32_toInt(player.base.velX);
             if (velXInt == 0) {
                 setPlayerState(PLAYER_STATE_IDLE);
             } else {
@@ -124,8 +124,8 @@ void playerUpdate() {
 
     // Update sprite position
     if (player.base.sprite) {
-        s16 spriteX = player.base.posX >> 16; // Convert fix32 to int
-        s16 spriteY = player.base.posY >> 16;
+        s16 spriteX = F32_toInt(player.base.posX);
+        s16 spriteY = F32_toInt(player.base.posY);
         SPR_setPosition(player.base.sprite, spriteX, spriteY);
         SPR_setHFlip(player.base.sprite, !player.base.facingRight);
     }
