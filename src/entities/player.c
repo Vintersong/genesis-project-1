@@ -122,13 +122,6 @@ void playerUpdate() {
     // Keep player in bounds
     entityKeepInBounds(&player.base);
 
-    // Update sprite position
-    if (player.base.sprite) {
-        s16 spriteX = F32_toInt(player.base.posX);
-        s16 spriteY = F32_toInt(player.base.posY);
-        SPR_setPosition(player.base.sprite, spriteX, spriteY);
-        SPR_setHFlip(player.base.sprite, !player.base.facingRight);
-    }
 }
 
 void setPlayerState(PlayerState newState) {

@@ -3,6 +3,10 @@
 #include "core/config.h"
 #include "camera.h"
 #include "assetLoader.h"
+#include "core/entity.h"
+#include "entities/player.h"
+#include "entities/enemy.h"
+#include "entities/boss.h"
 
 int main() {
     // Initialize all game systems
@@ -15,6 +19,11 @@ int main() {
         
         // Update camera
         mainCamera();
+
+        // Place sprites using this frame's final camera position
+        entitySyncSprite(&player.base);
+        entitySyncSprite(&enemy.base);
+        entitySyncSprite(&boss.base);
         
         // Update background scrolling
         updateBackgroundScroll();

@@ -40,12 +40,6 @@ void bossUpdate(void) {
         boss.base.currentState = boss.base.onGround ? BOSS_STATE_IDLE : BOSS_STATE_FALLING;
     }
 
-    if (boss.base.sprite) {
-        s16 spriteX = F32_toInt(boss.base.posX);
-        s16 spriteY = F32_toInt(boss.base.posY);
-        SPR_setPosition(boss.base.sprite, spriteX, spriteY);
-        SPR_setHFlip(boss.base.sprite, !boss.base.facingRight);
-    }
 }
 
 void bossTakeDamage(u16 amount) {

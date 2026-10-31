@@ -35,4 +35,10 @@ bool entityTakeDamage(Entity* e, u16 amount);
  */
 void entityKeepInBounds(Entity* e);
 
+/**
+ * @brief Position the entity's sprite on screen (world pos minus camera) and apply facing.
+ * Call after the camera has been updated for the frame.
+ */
+void entitySyncSprite(Entity* e);
+
 #endif // ENTITY_H

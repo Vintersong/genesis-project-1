@@ -4,6 +4,7 @@
 #include "systems/physics.h"
 #include "systems/collision.h"
 #include "world/tilemap.h"
+#include "camera.h"
 
 void entityApplyPhysics(Entity* e) {
     if (!e) return;
@@ -53,4 +54,14 @@ void entityKeepInBounds(Entity* e) {
         e->posX = FIX32(TILEMAP_WIDTH_TILES * TILE_DIMENSION - PLAYER_HITBOX_SIZE);
         e->velX = FIX32(0);
     }
+}
+
+void entitySyncSprite(Entity* e) {
+    if (!e || !e->sprite) return;
+
+    // Sprites live in screen space; entity positions are world space.
+    s16 screenX = F32_toInt(e->posX) - (s16)currentCameraX;
+    s16 screenY = F32_toInt(e->posY) - (s16)currentCameraY;
+    SPR_setPosition(e->sprite, screenX, screenY);
+    SPR_setHFlip(e->sprite, !e->facingRight);
 }

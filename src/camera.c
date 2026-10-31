@@ -138,5 +138,4 @@ void mainCamera()
         tilemapScrollTo(currentCameraX, currentCameraY);
     }
 
-    // TO-DO Update player sprite position SPR_setPosition(playerSprite, F32_toInt(player.posX)-newCameraPositionX, F32_toInt(player.posY)-newCameraPositionY);
 }

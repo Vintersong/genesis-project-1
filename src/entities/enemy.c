@@ -37,12 +37,6 @@ void enemyUpdate(void) {
         enemy.base.currentState = enemy.base.onGround ? ENEMY_STATE_IDLE : ENEMY_STATE_FALLING;
     }
 
-    if (enemy.base.sprite) {
-        s16 spriteX = F32_toInt(enemy.base.posX);
-        s16 spriteY = F32_toInt(enemy.base.posY);
-        SPR_setPosition(enemy.base.sprite, spriteX, spriteY);
-        SPR_setHFlip(enemy.base.sprite, !enemy.base.facingRight);
-    }
 }
 
 void enemyTakeDamage(u16 amount) {
